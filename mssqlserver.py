@@ -5,7 +5,7 @@ db_name = 'Dekanat2021'
 User = 'saa'
 password = '322322'
 
-cnxn = pyodbc.connect("Driver={SQL Server Native Client 10.0};"
+cnxn = pyodbc.connect("Driver={SQL Server Native Client 11.0};"
                         f"Server={server_name};"
                         f"Database={db_name};"
                         f"uid={User};pwd={password}")

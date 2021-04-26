@@ -8,14 +8,13 @@ import config
 import schedule
 import tkinter
 import pydoc
-import pygame
 import pyodbc
 import pandas as pd
 
 from telebot import types
 
 bot = telebot.TeleBot(config.token)
-
+bot = bot
 @bot.message_handler(commands=['start'])
 def welcome(message):
     # image1 = open('stick/sticker.webp', 'rb')
@@ -38,13 +37,13 @@ def welcome(message):
 @bot.message_handler(content_types=['text'])
 def lalala(message):
     if message.chat.type == 'private':
-        if message.text == None:        ##Ответ 'Да'
-            pass
+        if message.text == config.b0[0]:        ##Ответ 'Да'
+            timer_send_message(message)
         elif message.text == config.b0[1]:  ##Ответ 'Нет'
             bot.send_message(message.chat.id, config.localtext1.format(message.from_user, bot.get_me()),
                              parse_mode='html')
         else:
-            answer = ''
+            answer = '' #dasdsade
             with OutputInterceptor() as output:
                 help(message.text)
             answer = '\n'.join(output)
@@ -83,9 +82,9 @@ def timer_send_message(message):
     with open('last_id_update', 'w') as f:  # Записываем в базу данных новый код обнавления
         f.write(str(last_id_update))
 
-@bot.message_handler(content_types=None)
-def send_mes(message):
-    timer_send_message(message)
-    print(1)
+# @bot.message_handler(content_types=['text'])
+# def send_mes(message):
+#     timer_send_message(message)
+#     print(1)
 # RUN
 bot.polling(none_stop=True)
